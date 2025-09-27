@@ -1,0 +1,112 @@
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.row:last-of-type {
+  border-bottom: none;
+}
+
+.rowHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.label {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.value {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.keyValueList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  background: rgba(118, 118, 128, 0.12);
+  color: inherit;
+}
+
+.badge strong {
+  font-weight: 600;
+}
+
+.keyValue {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.keyValue dt {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(60, 60, 67, 0.6);
+}
+
+.keyValue dd {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.linkButton {
+  align-self: flex-start;
+  margin-top: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #0071e3;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+
+.linkButton:hover {
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .linkButton {
+    transition: none;
+  }
+}
