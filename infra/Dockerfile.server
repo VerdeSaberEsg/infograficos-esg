@@ -1,0 +1,17 @@
+# syntax=docker/dockerfile:1.6
+FROM node:20-bullseye AS base
+WORKDIR /app
+COPY pnpm-workspace.yaml ./
+COPY server/package.json server/tsconfig.json server/.eslintrc.cjs server/.prettierrc server/src ./server/
+RUN corepack enable && corepack prepare pnpm@9.1.0 --activate
+RUN pnpm install --frozen-lockfile --filter esg-mvp-server...
+RUN pnpm --filter esg-mvp-server build
+
+FROM node:20-bullseye-slim
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=base /app/server/dist ./dist
+COPY server/package.json ./package.json
+RUN corepack enable && corepack prepare pnpm@9.1.0 --activate && pnpm install --prod --frozen-lockfile --filter esg-mvp-server...
+EXPOSE 8080
+CMD ["node", "dist/index.js"]

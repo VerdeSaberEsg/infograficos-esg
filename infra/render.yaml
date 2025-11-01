@@ -1,0 +1,51 @@
+services:
+  - type: web
+    name: esg-mvp-web
+    env: docker
+    plan: starter
+    dockerfilePath: infra/Dockerfile.web
+    autoDeploy: false
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: /api
+  - type: web
+    name: esg-mvp-server
+    env: docker
+    plan: starter
+    dockerfilePath: infra/Dockerfile.server
+    autoDeploy: false
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: ALLOWED_ORIGIN
+        value: https://your-web-domain
+      - key: RECEITA_CNPJ_URL
+        sync: false
+      - key: RECEITA_SIMPLES_URL
+        sync: false
+      - key: PNCP_URL
+        sync: false
+      - key: PGFN_URL
+        sync: false
+      - key: TST_CNDT_URL
+        sync: false
+      - key: RECEITA_CND_URL
+        sync: false
+      - key: CAIXA_CRF_URL
+        sync: false
+      - key: CAGED_URL
+        sync: false
+      - key: RAIS_URL
+        sync: false
+      - key: MTE_URL
+        sync: false
+      - key: IBAMA_URL
+        sync: false
+      - key: ICMBIO_URL
+        sync: false
+      - key: SINAFLOR_URL
+        sync: false
+      - key: CTF_URL
+        sync: false
+      - key: PRODES_URL
+        sync: false

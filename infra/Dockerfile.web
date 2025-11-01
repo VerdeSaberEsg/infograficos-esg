@@ -1,0 +1,16 @@
+# syntax=docker/dockerfile:1.6
+FROM node:20-bullseye AS base
+WORKDIR /app
+COPY pnpm-workspace.yaml ./
+COPY webapp/package.json webapp/tsconfig.json webapp/tsconfig.node.json webapp/vite.config.ts webapp/index.html webapp/src ./webapp/
+RUN corepack enable && corepack prepare pnpm@9.1.0 --activate
+RUN pnpm install --frozen-lockfile --filter esg-mvp-webapp...
+RUN pnpm --filter esg-mvp-webapp build
+
+FROM node:20-bullseye-slim
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=base /app/webapp/dist ./dist
+RUN npm install -g serve
+EXPOSE 5173
+CMD ["serve", "-s", "dist", "-l", "5173"]
