@@ -1,0 +1,17 @@
+{
+  "name": "ESG MVP",
+  "dockerComposeFile": "../infra/docker-compose.yml",
+  "service": "webapp",
+  "workspaceFolder": "/workspace/infograficos-esg",
+  "forwardPorts": [5173, 8080],
+  "postCreateCommand": "corepack enable && corepack prepare pnpm@9.1.0 --activate && pnpm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+}

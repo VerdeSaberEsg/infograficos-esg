@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  server:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.server
+    env_file:
+      - ../.env
+    ports:
+      - "${API_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - esg-net
+
+  webapp:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.web
+    environment:
+      - VITE_API_BASE_URL=/api
+    ports:
+      - "${WEB_PORT:-5173}:5173"
+    depends_on:
+      server:
+        condition: service_healthy
+    networks:
+      - esg-net
+
+networks:
+  esg-net:
+    driver: bridge
